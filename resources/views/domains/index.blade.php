@@ -1,0 +1,4 @@
+<x-layouts.app title="Sending Domains">
+    <form method="post" action="{{ route('sending-domains.store') }}" class="flex gap-3 rounded-xl border border-slate-800 bg-slate-900 p-5">@csrf<input name="domain" required placeholder="example.com" class="flex-1 rounded bg-slate-950 p-2"><button class="rounded bg-blue-600 px-4 py-2">Add</button></form>
+    <div class="mt-4 grid gap-2">@foreach($domains as $domain)<div class="rounded border border-slate-800 bg-slate-900 p-4"><strong>{{ $domain->domain }}</strong><div class="text-sm text-slate-400">SPF {{ $domain->spf_status }} / DKIM {{ $domain->dkim_status }} / DMARC {{ $domain->dmarc_status }} / MX {{ $domain->mx_status }}</div><form method="post" action="{{ route('sending-domains.check', $domain) }}" class="mt-2">@csrf<button class="text-blue-400">Check DNS</button></form></div>@endforeach</div>
+</x-layouts.app>
